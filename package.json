@@ -1,7 +1,7 @@
 {
   "name": "integrity-bot",
   "version": "1.0.0",
-  "description": "A small Discord bot that creates channels, categories and cosmetic roles through a /create menu.",
+  "description": "A small Discord bot that creates channels, categories and cosmetic roles through a /create menu, made by me becauze I am peak.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
