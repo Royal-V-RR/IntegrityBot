@@ -24,6 +24,11 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Pull latest botdata.json data ig idk
+        run: |
+          git fetch origin main
+          git checkout origin/main -- botdata.json || echo "No botdata.json exists"
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -33,7 +38,7 @@ jobs:
         run: npm install
 
       - name: Start bot
-        run: node index.js
+        run: node index.cjs
         env:
           TOKEN: ${{ secrets.TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
