@@ -26,17 +26,15 @@ if (!TOKEN) {
   process.exit(1);
 }
 
-// Set to false to let any member use /create (the bot still needs permissions).
-const REQUIRE_PERMISSIONS = true;
+
+const REQUIRE_PERMISSIONS = false;
 
 const COLOR = 0x7c5cff;
 const GREEN = 0x57f287;
 const RED = 0xed4245;
 const FOOTER = { text: 'Integrity Bot' };
 
-// ---------------------------------------------------------------------------
-// What can be created
-// ---------------------------------------------------------------------------
+
 const KINDS = {
   text: {
     label: 'Text Channel',
@@ -95,18 +93,13 @@ const KINDS = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// Pending creations, keyed by the menu message id
-// ---------------------------------------------------------------------------
 const pending = new Map();
 setInterval(() => {
   const cutoff = Date.now() - 15 * 60 * 1000;
   for (const [id, state] of pending) if (state.at < cutoff) pending.delete(id);
 }, 5 * 60 * 1000).unref();
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+
 const embed = (color = COLOR) => new EmbedBuilder().setColor(color).setFooter(FOOTER);
 
 const fail = (text) => ({
@@ -159,9 +152,7 @@ function field(id, label, { style = TextInputStyle.Short, required = false, max 
   return new ActionRowBuilder().addComponents(input);
 }
 
-// ---------------------------------------------------------------------------
-// UI builders
-// ---------------------------------------------------------------------------
+
 function menuPayload() {
   const lines = Object.values(KINDS).map((k) => `${k.emoji} **${k.label}**  ${k.desc}`);
   return {
